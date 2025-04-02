@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from pupil_apriltags import Detector
 
-# Define the AprilTag detector
 at_detector = Detector(
    families="tag36h11",
    nthreads=1,
@@ -13,12 +12,10 @@ at_detector = Detector(
    debug=0
 )
 
-# Define the camera intrinsic parameters
-# Replace these with your actual camera calibration parameters
+
 fx = 189  # Focal length in x-axis (in pixels)
 fy = 91   # Focal length in y-axis (in pixels)
 
-# Assuming the principal point is at the center of the image
 frame_width = 1280
 frame_height = 720
 cx = frame_width / 2
@@ -27,12 +24,11 @@ cy = frame_height / 2
 camera_matrix = np.array([[fx, 0, cx],
                           [0, fy, cy],
                           [0, 0, 1]])
-dist_coeffs = np.zeros((4, 1))  # Assuming no lens distortion
+dist_coeffs = np.zeros((4, 1))  
 
-# Define the real-world size of the AprilTag (in meters)
-tag_size = 0.165  # Example: 16.5 cm
 
-# Initialize video capture
+tag_size = 0.165
+
 capt = cv2.VideoCapture(0)
 capt.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
 capt.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
