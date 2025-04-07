@@ -4,6 +4,8 @@ import cv2 # unused
 from pupil_apriltags import Detector # unused
 from mavsdk import System
 
+# async function for camera detection
+
 async def run():
     # start of do not touch 
     drone = System()
@@ -16,7 +18,7 @@ async def run():
     
     
         if health.is_global_position_ok:
-            print("drone ok")
+            print("drone skib")
             break
     # end of do not touch
 
@@ -48,12 +50,18 @@ async def run():
         ]
     
     # start of rectangular search code
+    tagfound = asyncio.Event()
+    detect_task = asyncio.create_task(tagfound)
 
-    for i, (target_lat, target_lon) in enumerate(corners):
-        print(f"target: {target_lat}, {target_lon}")
-        await drone.action.goto_location(target_lat, target_lon, current_alt, speed)
-        await asyncio.sleep(15)
-        
+    try:
+        for i, (target_lat, target_lon) in enumerate(corners):
+            print(f"target: {target_lat}, {target_lon}")
+            await drone.action.goto_location(target_lat, target_lon, current_alt, speed)
+            # while loop with async sleep for short duration and constantly checking?
+            await asyncio.sleep(15)
+     
+
+       
 
     await drone.action.return_to_launch()
 

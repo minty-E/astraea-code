@@ -50,20 +50,7 @@ try:
         for tag in tags:
             image_points = tag.corners
 
-            # Calculate the width and height of the detected tag in pixels
-            tag_width_pixels = np.linalg.norm(image_points[0] - image_points[1])
-            tag_height_pixels = np.linalg.norm(image_points[1] - image_points[2])
-
-            # Calculate the average size in pixels
-            tag_size_pixels = (tag_width_pixels + tag_height_pixels) / 2
-
-            # Calculate the distance from the camera to the tag
-            distance = (fx * tag_size) / tag_size_pixels
-            print(f"Distance to tag: {distance:.2f} meters")
-
-            # Draw the tag on the frame
             cv2.rectangle(frame, tuple(tag.corners[0].astype(int)), tuple(tag.corners[2].astype(int)), (0, 255, 0), 2)
-            cv2.putText(frame, f"{distance:.2f}m", tuple(tag.corners[0].astype(int)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
         cv2.imshow('Frame', frame)
         if cv2.waitKey(1) & 0xFF == ord(' '):
