@@ -18,6 +18,7 @@ async def detect_tag():
     )
     
     # focal lengths, change with rpi camera
+    # TODO: edit camera specs
     fx = 179
     fy = 91
 
@@ -60,6 +61,7 @@ async def detect_tag():
         cv2.imshow('Frame', frame)
         if cv2.waitKey(1) & 0xFF == ord(' '):
             # TODO: have it flag tagfound
+            
             break 
 
 async def run():
