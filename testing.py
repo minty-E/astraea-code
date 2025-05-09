@@ -5,7 +5,7 @@ from pupil_apriltags import Detector # unused
 from mavsdk import System
 
 # async function for camera detection
-
+'''
 async def detect_tag():
     at_detector = Detector(
         families="tag36h11",
@@ -63,7 +63,7 @@ async def detect_tag():
             # TODO: have it flag tagfound
             
             break 
-
+'''
 async def run():
     # start of do not touch 
     drone = System()
